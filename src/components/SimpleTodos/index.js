@@ -29,19 +29,13 @@ class SimpleTodos extends Component {
     const {todosList, newTodoTitle} = this.state
     if (newTodoTitle.trim() === '') return
 
-    const [title, num] = newTodoTitle.split(' ')
-    const numOfTodos = parseInt(num, 10) || 1
-    const updatedTodosList = [...todosList]
-
-    for (let i = 0; i < numOfTodos; i + 1) {
-      updatedTodosList.push({
-        id: updatedTodosList.length + 1,
-        title,
-      })
+    const newTodo = {
+      id: todosList.length + 1,
+      title: newTodoTitle,
     }
 
     this.setState({
-      todosList: updatedTodosList,
+      todosList: [...todosList, newTodo],
       newTodoTitle: '',
     })
   }
@@ -61,7 +55,7 @@ class SimpleTodos extends Component {
             type="text"
             value={newTodoTitle}
             onChange={this.handleChange}
-            placeholder="Enter todo title and number (e.g., 'Buy milk 3')"
+            placeholder="Enter todo title"
             className="todo-input"
           />
           <button type="button" onClick={this.addTodo} className="add-btn">
